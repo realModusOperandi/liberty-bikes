@@ -8,15 +8,17 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, UITextFieldDelegate  {
     var backgroundLayer = GradientBackground(frame: .zero, colors: [CGColor]())
     var titleView = UILabel()
+    var loginForm = UIView()
     
     init() {
         super.init(nibName: nil, bundle: nil)
         
         backgroundLayer = createBackground()
         titleView = createTitle()
+        loginForm = createLoginForm()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -35,17 +37,19 @@ class LoginViewController: UIViewController {
         titleView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
         titleView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5).isActive = true
         
+        view.addSubview(loginForm)
+        
+        loginForm.topAnchor.constraint(equalTo: titleView.bottomAnchor, constant: 10.0).isActive = true
+        loginForm.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        loginForm.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        
+        view.bringSubview(toFront: loginForm)
+        
         updateFrames()
     }
     
     func updateFrames() {
         backgroundLayer.frame = view.frame
-//        titleView.frame = view.frame
-        
-        // Set up title frame
-//        titleView.frame.size = titleView.sizeThatFits(CGSize(width: view.bounds.width, height: CGFloat.greatestFiniteMagnitude))
-//        titleView.frame.size.width = view.bounds.width
-//        titleView.frame.origin = CGPoint(x: 15, y: view.bounds.height / 4)
     }
 
     override func didReceiveMemoryWarning() {
@@ -99,6 +103,37 @@ class LoginViewController: UIViewController {
         
         return title
         
+    }
+    
+    func createLoginForm() -> UIView {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        let usernameLabel = UILabel()
+        usernameLabel.translatesAutoresizingMaskIntoConstraints = false
+        usernameLabel.text = "Username"
+        
+        view.addSubview(usernameLabel)
+        usernameLabel.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        usernameLabel.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        
+        let usernameField = UITextField()
+        usernameField.translatesAutoresizingMaskIntoConstraints = false
+        usernameField.delegate = self
+        
+        view.addSubview(usernameField)
+        usernameField.topAnchor.constraint(equalTo: usernameLabel.bottomAnchor, constant: 10.0).isActive = true
+        usernameField.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        usernameField.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        
+        view.bringSubview(toFront: usernameField)
+        
+        return view
+    }
+    
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        print("textFieldShouldBeginEditing")
+        return true
     }
 
 }
