@@ -10,5 +10,6 @@
                   
     <applicationManager autoExpand="true"/>
 
-    <webApplication location="${application.name}" contextRoot="/"/>
+    <webApplication location="${application.name}" contextRoot="/bikes" >
+    </webApplication>
 </server>

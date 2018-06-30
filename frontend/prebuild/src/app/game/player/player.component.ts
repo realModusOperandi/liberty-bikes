@@ -67,9 +67,9 @@ export class PlayerComponent implements OnInit {
           filename = Constants.GREEN_FILENAME;
           break;
       }
-      return `/assets/images/${filename}`;
+      return `./assets/images/${filename}`;
     } else {
-      return `/assets/images/status_${status}.png`;
+      return `./assets/images/status_${status}.png`;
     }
   }
 

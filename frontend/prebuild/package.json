@@ -5,8 +5,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
-    "prod": "ng build --prod",
+    "build": "ng build --base-href /bikes/ --deploy-url /bikes/",
+    "prod": "ng build --prod --base-href /bikes/ --deploy-url /bikes/",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
